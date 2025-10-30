@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Therapist = require("../models/Therapist");
 
-const defaultReferral = AKYQYVST;
+const defaultReferral = "AKYQYVST";
 
 const signup = async (req, res) => {
   try {
