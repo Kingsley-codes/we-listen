@@ -145,7 +145,7 @@ const sendMessage = async (req, res) => {
             sessionId: session._id.toString(),
             sender: "user",
             createdAt: msg.createdAt,
-            url: 'https://we-listen.co/therapist/homePage?'
+            url: 'https://we-listen.co/therapist/homePage'
           },
         });
       }
@@ -164,7 +164,7 @@ const sendMessage = async (req, res) => {
             data: {
               sessionId: session._id.toString(),
               createdAt: msg.createdAt,
-              url: 'https://we-listen.co/therapist/homePage?'
+              url: 'https://we-listen.co/therapist/homePage'
             },
           });
         }
