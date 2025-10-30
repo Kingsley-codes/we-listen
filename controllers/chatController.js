@@ -163,6 +163,7 @@ const sendMessage = async (req, res) => {
             data: {
               sessionId: session._id.toString(),
               createdAt: msg.createdAt,
+              url: `https://we-listen.co/therapist/homePage/${session._id.toString()}`
             },
           });
         }
