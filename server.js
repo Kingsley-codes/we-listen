@@ -25,17 +25,6 @@ app.use(cors());
 // Normal JSON body parser (all non-webhook routes)
 app.use(express.json());
 
-// body parser for regular routes
-// app.use((req, res, next) => {
-//   if (["POST", "PUT", "PATCH"].includes(req.method)) {
-//     express.json()(req, res, next);
-//   } else {
-//     next();
-//   }
-// });
-
-// Webhook route must use raw body BEFORE express.json
-// This is isolated only to webhook endpoint
 app.use("/payments/webhook", rawBodyForWebhook, paystackWebhook);
 
 // Other routes
