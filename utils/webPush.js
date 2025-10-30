@@ -8,7 +8,9 @@ webpush.setVapidDetails(
 
 async function sendPush(subscription, payload) {
   try {
+    console.log("sendpush called");
     await webpush.sendNotification(subscription, JSON.stringify(payload));
+    console.log("Push sent successfully");
   } catch (err) {
     console.error("Push error:", err);
   }
