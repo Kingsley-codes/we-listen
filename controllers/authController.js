@@ -27,7 +27,8 @@ const signup = async (req, res) => {
       username,
       passwordHash: hash,
       referralCode,
-      paid_credit_seconds: 31622400,
+      paid_credit_seconds: referralCode ? 31622400 : 0,
+      free_credit_seconds: referralCode ? 0 : 150 * 60,
       unlimitedPlan: referralCode ? true : false,
     });
 
