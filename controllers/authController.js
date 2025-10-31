@@ -1,9 +1,17 @@
+import ReferralCode from "../models/referralCodeModel";
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const Therapist = require("../models/Therapist");
 
-const defaultReferral = "AKYQYVST";
+
+export const generateReferralCode = () => Math.random().toString(36).substring(2, 10).toUpperCase();
+
+const adminMail = "dareadedeji@gmail.com";
+
+const defaultReferral = await ReferralCode.findOne();
+
 
 const signup = async (req, res) => {
   try {
@@ -18,8 +26,22 @@ const signup = async (req, res) => {
     if (await User.findOne({ username }))
       return res.status(400).json({ message: "Username taken" });
 
-    if (referralCode && referralCode !== defaultReferral) {
-      return res.status(400).json({ message: "Invalid referral code" });
+    if (referralCode) {
+      if (referralCode !== defaultReferral.currentCode) {
+        return res.status(400).json({
+          message: "Invalid referral code"
+        });
+
+      } else if (referralCode === defaultReferral.currentCode) {
+        if (defaultReferral.usageCount > 4) {
+          return res.status(400).json({
+            message: "Referral code has exceeded usage limit"
+          });
+        } else {
+          defaultReferral.usageCount += 1;
+          await defaultReferral.save();
+        }
+      }
     }
 
     const hash = await bcrypt.hash(password, 10);
@@ -31,6 +53,12 @@ const signup = async (req, res) => {
       free_credit_seconds: referralCode ? 0 : 150 * 60,
       unlimitedPlan: referralCode ? true : false,
     });
+
+    if (defaultReferral.usageCount >= 5) {
+      defaultReferral.currentCode = generateReferralCode();
+      defaultReferral.usageCount = 0;
+      await defaultReferral.save();
+    }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_EXPIRES_IN,
