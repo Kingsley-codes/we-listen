@@ -147,6 +147,7 @@ const login = async (req, res) => {
         username: user.username,
         freecredits: user.free_credit_seconds,
         paidcredit: user.paid_credit_seconds,
+        unlimitedPlan: user.unlimitedPlan,
       },
     });
   } catch (err) {
