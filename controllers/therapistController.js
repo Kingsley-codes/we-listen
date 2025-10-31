@@ -160,6 +160,7 @@ const replyToSession = async (req, res) => {
     await publishToSession(session._id.toString(), "message", {
       sender: "therapist",
       text,
+      sessionId,
       createdAt: msg.createdAt,
     });
 

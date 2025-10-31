@@ -27,7 +27,8 @@ const signup = async (req, res) => {
       username,
       passwordHash: hash,
       referralCode,
-      free_credit_seconds: referralCode ? 604800 : 9000
+      paid_credit_seconds: 31622400,
+      unlimitedPlan: referralCode ? true : false,
     });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {

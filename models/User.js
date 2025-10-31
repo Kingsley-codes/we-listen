@@ -5,6 +5,8 @@ const UserSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
   free_credit_seconds: { type: Number, default: 150 * 60 },
   paid_credit_seconds: { type: Number, default: 0 },
+  referralCode: { type: String },
+  unlimitedPlan: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
 
