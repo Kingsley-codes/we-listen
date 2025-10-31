@@ -115,6 +115,7 @@ const sendMessage = async (req, res) => {
     const payload = {
       sender: "user",
       text,
+      sessionId: session._id,
       createdAt: msg.createdAt,
     };
 
