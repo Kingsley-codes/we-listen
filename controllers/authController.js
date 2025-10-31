@@ -1,5 +1,4 @@
-import ReferralCode from "../models/referralCodeModel.js";
-
+const ReferralCode = require("../models/referralCodeModel.js");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
