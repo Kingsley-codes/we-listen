@@ -6,10 +6,6 @@ const ReferralCodeSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    createdAt: {
-        type: Date,
-        default: Date.now
-    },
     usageCount: {
         type: Number,
         default: 0
