@@ -67,6 +67,8 @@ const signup = async (req, res) => {
       defaultReferral.currentCode = generateReferralCode();
       defaultReferral.usageCount = 0;
       await defaultReferral.save();
+      console.log("The new code is: ", defaultReferral.currentCode);
+
     }
 
     // Sign token
